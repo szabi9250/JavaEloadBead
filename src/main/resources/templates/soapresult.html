@@ -43,9 +43,11 @@
 
 
     <h1>Történeti árfolyam: <span th:text="${currency}"></span></h1>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div style="width: 900px; height: 500px; margin: 0 auto;">
+        <canvas id="priceChart" width="600" height="400"></canvas>
 
-    <canvas id="priceChart" width="600" height="400"></canvas>
-    <script th:inline="javascript">
+        <script th:inline="javascript">
         /*<![CDATA[*/
         const labels = [[${dates}]];
         const data = [[${rates}]];
@@ -84,7 +86,7 @@
         });
         /*]]>*/
     </script>
-
+    </div>
     <a th:href="@{/soapform}">Vissza az űrlaphoz</a>
 
         <!-- Footer -->
@@ -106,7 +108,6 @@
 <script src="/js/breakpoints.min.js"></script>
 <script src="/js/util.js"></script>
 <script src="/js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 </html>

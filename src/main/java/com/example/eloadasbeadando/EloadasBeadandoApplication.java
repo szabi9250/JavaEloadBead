@@ -25,6 +25,7 @@ public class EloadasBeadandoApplication {
     }
 
 
+
     @PostMapping("/soapfeladat")
     public String soap2(@ModelAttribute MessagePrice messagePrice, Model model) throws Exception {
         MNBArfolyamServiceSoapImpl impl = new MNBArfolyamServiceSoapImpl();
