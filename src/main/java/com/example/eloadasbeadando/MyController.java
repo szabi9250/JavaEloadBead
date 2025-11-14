@@ -15,6 +15,21 @@ public class MyController {
         return "soapform"; //
     }
 
+    @GetMapping("/forexacc")
+    public String showForexAcc() {
+        return "forexacc";
+    }
 
+    @GetMapping("/forexact_form")
+    public String showForexActForm(Model model) {
+        model.addAttribute("param", new MessageActPrice());
+        return "forexact_form";
+    }
+
+    @GetMapping("/forexhist_form")
+    public String showForexHistForm(Model model) {
+        model.addAttribute("param", new MessageHistPrice());
+        return "forexhist_form";
+    }
 
 }

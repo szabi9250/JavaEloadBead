@@ -5,118 +5,80 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>Kezdőlap</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/css/main.css" />
-	</head>
-	<body class="is-preload">
-		<div id="page-wrapper">
+<head>
+    <title>SOAP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body class="is-preload">
+<div id="page-wrapper">
 
-			<!-- Header -->
-				<div id="header">
+    <!-- Header -->
+    <div id="header">
 
-					<!-- Logo -->
-						<h1><a href="/index.html" id="logo">Java előadás beadandó</a></h1>
+        <!-- Logo -->
+        <h1><a href="/index.html" id="logo">Java előadás beadandó</a></h1>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="/index.html">Kezdőlap</a></li>
-								<li class="current"><a href="soapform.html">SOAP</a></li>
-								<li>
-									<a href="#">Forex</a>
-									<ul>
-										<li><a href="forexacc.html">Account</a></li>
-										<li><a href="#">Aktuális ár</a></li>
-										<li><a href="#">Történeti ár</a></li>
-										<li><a href="#">Nyitás</a></li>
-										<li><a href="#">Pozíció</a></li>
-										<li><a href="#">Zárás</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="/index.html">Kezdőlap</a></li>
+                <li><a href="/soapform">SOAP</a></li>
+                <li class="current">
+                    <a href="#">Forex</a>
+                    <ul>
+                        <li><a href="/forexacc">Account</a></li>
+                        <li><a href="/forexact">Aktuális ár</a></li>
+                        <li><a href="/forexhist">Történeti ár</a></li>
+                        <li><a href="/forexopen">Nyitás</a></li>
+                        <li><a href="/forexpoz">Pozíció</a></li>
+                        <li><a href="/forexclose">Zárás</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-				</div>
+    </div>
 
+    <div>
+        <h2>Forex fiók adatai:</h2>
+        <pre id="summary-box">Betöltés...</pre>
 
-			<!-- Gigantic Heading -->
-				<section class="wrapper style2">
-					<div class="container">
-						<header class="major">
-							<h2>A gigantic heading you can use for whatever</h2>
-							<p>With a much smaller subtitle hanging out just below it</p>
-						</header>
-					</div>
-				</section>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                fetch("/account_info")
+                    .then(res => res.json())
+                    .then(data => {
+                        const box = document.getElementById("summary-box");
+                        box.textContent = JSON.stringify(data, null, 2);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        document.getElementById("summary-box").textContent = "Hiba történt!";
+                    });
+            });
+        </script>
+    </div>
 
-			<!-- Posts -->
-				<section class="wrapper style1">
-					<div class="container">
-						<div class="row">
-							<section class="col-6 col-12-narrower">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>The First Thing</h3>
-										<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-									</div>
-								</div>
-							</section>
-							<section class="col-6 col-12-narrower">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/pic02.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>The Second Thing</h3>
-										<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-									</div>
-								</div>
-							</section>
-						</div>
-						<div class="row">
-							<section class="col-6 col-12-narrower">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/pic03.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>The Third Thing</h3>
-										<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-									</div>
-								</div>
-							</section>
-							<section class="col-6 col-12-narrower">
-								<div class="box post">
-									<a href="#" class="image left"><img src="images/pic04.jpg" alt="" /></a>
-									<div class="inner">
-										<h3>The Fourth Thing</h3>
-										<p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
-									</div>
-								</div>
-							</section>
-						</div>
-					</div>
-				</section>
+        <!-- Footer -->
+        <div id="footer">
+            <!-- Copyright -->
+            <div class="copyright">
+                <ul class="menu">
+                    <li>&copy; Szebeni Szabolcs java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
 
-				<!-- Footer -->
-				<div id="footer">
-					<!-- Copyright -->
-						<div class="copyright">
-							<ul class="menu">
-								<li>&copy; Szebeni Szabolcs java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
+        </div>
+</div>
 
-				</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 
-		</div>
-
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
