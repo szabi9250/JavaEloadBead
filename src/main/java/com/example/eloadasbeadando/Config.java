@@ -1,4 +1,4 @@
-Cpackage com.example.eloadasbeadando;
+package com.example.eloadasbeadando;
 import com.oanda.v20.account.AccountID;
 
 public class Config {
