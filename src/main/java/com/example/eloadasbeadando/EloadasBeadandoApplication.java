@@ -24,10 +24,9 @@ import com.oanda.v20.instrument.Candlestick;
 import com.oanda.v20.instrument.InstrumentCandlesRequest;
 import com.oanda.v20.instrument.InstrumentCandlesResponse;
 import com.oanda.v20.primitives.InstrumentName;
-import static com.oanda.v20.instrument.CandlestickGranularity.*;
-import com.oanda.v20.order.MarketOrderRequest;
-import com.oanda.v20.order.OrderCreateRequest;
-import com.oanda.v20.order.OrderCreateResponse;
+import static com.oanda.v20.instrument.CandlestickGranularity.H1;
+
+
 
 @SpringBootApplication
 @Controller
@@ -50,6 +49,7 @@ public class EloadasBeadandoApplication {
                 messagePrice.getCurrency()
         );
 
+        // XML
         List<String> dates = new ArrayList<>();
         List<Double> rates = new ArrayList<>();
 
@@ -114,65 +114,4 @@ public class EloadasBeadandoApplication {
         return "forexact_result";
     }
 
-    //Forex történeti árak
-
-    @GetMapping("/hist_prices")
-    public String hist_prices(Model model) {
-        model.addAttribute("param", new MessageHistPrice());
-        return "forexhist_form";
-    }
-    @PostMapping("/hist_prices")
-    public String hist_prices2(@ModelAttribute MessageHistPrice messageHistPrice, Model model) {
-        String strOut;
-        try {
-            InstrumentCandlesRequest request = new InstrumentCandlesRequest(new
-                    InstrumentName(messageHistPrice.getInstrument()));
-            switch (messageHistPrice.getGranularity()) {
-                case "M1": request.setGranularity(M1); break;
-                case "H1": request.setGranularity(H1); break;
-                case "D": request.setGranularity(D); break;
-                case "W": request.setGranularity(W); break;
-                case "M": request.setGranularity(M); break;
-            }
-            request.setCount(Long.valueOf(10));
-            InstrumentCandlesResponse resp = ctx.instrument.candles(request);
-            strOut = "";
-            for (Candlestick candle : resp.getCandles())
-                strOut += candle.getTime() + "\t" + candle.getMid().getC() + ";";
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        model.addAttribute("instr", messageHistPrice.getInstrument());
-        model.addAttribute("granularity", messageHistPrice.getGranularity());
-        model.addAttribute("price", strOut);
-        return "forexhist_result";
-        }
-
-    //Forex nyitás
-    @GetMapping("/open_position")
-    public String open_position(Model model) {
-        model.addAttribute("param", new MessageOpenPosition());
-        return "forexopen_form";
-    }
-    @PostMapping("/open_position")
-    public String open_position2(@ModelAttribute MessageOpenPosition messageOpenPosition, Model
-            model) {
-        String strOut;
-        try {
-            InstrumentName instrument = new InstrumentName(messageOpenPosition.getInstrument());
-            OrderCreateRequest request = new OrderCreateRequest(Config.ACCOUNTID);
-            MarketOrderRequest marketorderrequest = new MarketOrderRequest();
-            marketorderrequest.setInstrument(instrument);
-            marketorderrequest.setUnits(messageOpenPosition.getUnits());
-            request.setOrder(marketorderrequest);
-            OrderCreateResponse response = ctx.order.create(request);
-            strOut="tradeId: "+response.getOrderFillTransaction().getId();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        model.addAttribute("instr", messageOpenPosition.getInstrument());
-        model.addAttribute("units", messageOpenPosition.getUnits());
-        model.addAttribute("id", strOut);
-        return "forexopen_result";
-    }
 }

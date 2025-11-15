@@ -26,10 +26,4 @@ public class MyController {
         return "forexact_form";
     }
 
-    @GetMapping("/forexhist_form")
-    public String showForexHistForm(Model model) {
-        model.addAttribute("param", new MessageHistPrice());
-        return "forexhist_form";
-    }
-
 }
