@@ -32,4 +32,11 @@ public class MyController {
         return "forexhist_form";
     }
 
+    @GetMapping("/forexopen_form")
+    public String showForexOpenForm(Model model) {
+        model.addAttribute("param", new MessageOpenPosition());
+        return "forexopen_form";
+    }
+
+
 }

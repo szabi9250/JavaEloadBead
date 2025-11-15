@@ -1,5 +1,6 @@
 package com.example.eloadasbeadando;
 
+import com.oanda.v20.trade.Trade;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import static com.oanda.v20.instrument.CandlestickGranularity.*;
 import com.oanda.v20.order.MarketOrderRequest;
 import com.oanda.v20.order.OrderCreateRequest;
 import com.oanda.v20.order.OrderCreateResponse;
+import com.oanda.v20.trade.*;
 
 @SpringBootApplication
 @Controller
@@ -76,6 +78,7 @@ public class EloadasBeadandoApplication {
 
 
     Context ctx = new Context(Config.URL, Config.TOKEN);
+
     //Forex account lekérés
     @GetMapping("/account_info")
     @ResponseBody
@@ -90,6 +93,7 @@ public class EloadasBeadandoApplication {
     }
 
     //Forex aktuális árak
+
     @GetMapping("/actual_prices")
     public String actual_prices(Model model) {
         model.addAttribute("par", new MessageActPrice());
@@ -149,6 +153,7 @@ public class EloadasBeadandoApplication {
         }
 
     //Forex nyitás
+
     @GetMapping("/open_position")
     public String open_position(Model model) {
         model.addAttribute("param", new MessageOpenPosition());
@@ -174,5 +179,44 @@ public class EloadasBeadandoApplication {
         model.addAttribute("units", messageOpenPosition.getUnits());
         model.addAttribute("id", strOut);
         return "forexopen_result";
+    }
+
+    //Forex nyitó pozíciók kiírása
+    @GetMapping("/forexpoz")
+    public String positions(Model model) {
+        Context ctx = new Context(Config.URL, Config.TOKEN);
+        List<Trade> tradesList = new ArrayList<>();
+
+        try {
+            List<Trade> trades = ctx.trade.listOpen(Config.ACCOUNTID).getTrades();
+            tradesList.addAll(trades);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("trades", tradesList);
+
+        return "forexpoz";
+    }
+
+    //Forex zárás
+
+    @GetMapping("/close_position")
+    public String close_position(Model model) {
+        model.addAttribute("param", new MessageClosePosition());
+        return "forexclose_form";
+    }
+
+    @PostMapping("/close_position")
+    public String close_position2(@ModelAttribute MessageClosePosition messageClosePosition, Model model) {
+        String tradeId= messageClosePosition.getTradeId()+"";
+        String strOut="Closed tradeId= "+tradeId;
+        try {
+            ctx.trade.close(new TradeCloseRequest(Config.ACCOUNTID, new TradeSpecifier(tradeId)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        model.addAttribute("tradeId", strOut);
+        return "forexclose_result";
     }
 }
