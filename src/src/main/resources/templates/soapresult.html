@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<!--
+	Arcana by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>SOAP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body class="is-preload">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <div id="header">
+
+        <!-- Logo -->
+        <h1><a href="/index.html" id="logo">Java előadás beadandó</a></h1>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="/index.html">Kezdőlap</a></li>
+                <li class="current"><a href="soapform.html">SOAP</a></li>
+                <li>
+                    <a href="#">Forex</a>
+                    <ul>
+                        <li><a href="/forexacc">Account</a></li>
+                        <li><a href="forexact_form">Aktuális ár</a></li>
+                        <li><a href="forexhist_form">Történeti ár</a></li>
+                        <li><a href="forexopen_form">Nyitás</a></li>
+                        <li><a href="forexpoz">Pozíció</a></li>
+                        <li><a href="forexclose_form">Zárás</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+
+    <h1>Történeti árfolyam: <span th:text="${currency}"></span></h1>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div style="width: 900px; height: 500px; margin: 0 auto;">
+        <canvas id="priceChart" width="600" height="400"></canvas>
+
+        <script th:inline="javascript">
+        const labels = [[${dates}]];
+        const data = [[${rates}]];
+
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels.reverse(),
+                datasets: [{
+                    label: 'Átváltás ([[${currency}]])',
+                    data: data.reverse(),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Rate'
+                        },
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+    </div>
+    <a th:href="@{/soapform}">Vissza az űrlaphoz</a>
+
+        <!-- Footer -->
+        <div id="footer">
+            <!-- Copyright -->
+            <div class="copyright">
+                <ul class="menu">
+                    <li>&copy; Szebeni Szabolcs, Suba Marcell java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
