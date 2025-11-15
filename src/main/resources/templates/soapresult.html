@@ -24,7 +24,7 @@
         <nav id="nav">
             <ul>
                 <li><a href="/index.html">Kezdőlap</a></li>
-                <li class="current"><a href="soapform.html">SOAP</a></li>
+                <li class="current"><a href="soapform">SOAP</a></li>
                 <li>
                     <a href="#">Forex</a>
                     <ul>
@@ -32,8 +32,8 @@
                         <li><a href="forexact_form">Aktuális ár</a></li>
                         <li><a href="forexhist_form">Történeti ár</a></li>
                         <li><a href="forexopen_form">Nyitás</a></li>
-                        <li><a href="forexpoz.html">Pozíció</a></li>
-                        <li><a href="forexclose.html">Zárás</a></li>
+                        <li><a href="forexpoz">Pozíció</a></li>
+                        <li><a href="forexclose_form">Zárás</a></li>
                     </ul>
                 </li>
             </ul>
@@ -48,7 +48,6 @@
         <canvas id="priceChart" width="600" height="400"></canvas>
 
         <script th:inline="javascript">
-        /*<![CDATA[*/
         const labels = [[${dates}]];
         const data = [[${rates}]];
 
@@ -71,20 +70,19 @@
                     x: {
                         title: {
                             display: true,
-                            text: 'Date'
+                            text: 'Dátum'
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Rate'
+                            text: 'Átváltás'
                         },
                         beginAtZero: false
                     }
                 }
             }
         });
-        /*]]>*/
     </script>
     </div>
     <a th:href="@{/soapform}">Vissza az űrlaphoz</a>
@@ -94,7 +92,7 @@
             <!-- Copyright -->
             <div class="copyright">
                 <ul class="menu">
-                    <li>&copy; Szebeni Szabolcs java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                    <li>&copy; Szebeni Szabolcs, Suba Marcell java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
                 </ul>
             </div>
 

@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-    <title>SOAP</title>
+    <title>Aktuális ár</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -33,7 +33,7 @@
                         <li><a href="/forexhist_form">Történeti ár</a></li>
                         <li><a href="/forexopen_form">Nyitás</a></li>
                         <li><a href="/forexpoz">Pozíció</a></li>
-                        <li><a href="/forexclose">Zárás</a></li>
+                        <li><a href="/forexclose_form">Zárás</a></li>
                     </ul>
                 </li>
             </ul>
@@ -43,14 +43,14 @@
 
     <div>
         <h2>Instrument választás az aktuális árakhoz</h2>
-        <form action="#" th:action="@{/actual_prices}" th:object="${par}" method="post">
+        <form action="#" th:action="@{/actual_prices}" th:object="${param}" method="post">
             <select th:field="*{instrument}">
                 <option value="EUR_USD">EUR_USD</option>
                 <option value="USD_CHF">USD_CHF</option>
                 <option value="GBP_USD">GBP_USD</option>
                 <option value="USD_JPY">USD_JPY</option>
             </select>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Beküldés">
         </form>
     </div>
 
@@ -59,7 +59,7 @@
         <!-- Copyright -->
         <div class="copyright">
             <ul class="menu">
-                <li>&copy; Szebeni Szabolcs java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                <li>&copy; Szebeni Szabolcs, Suba Marcell java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
             </ul>
         </div>
 

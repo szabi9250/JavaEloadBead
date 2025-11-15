@@ -99,7 +99,6 @@ public class EloadasBeadandoApplication {
         model.addAttribute("par", new MessageActPrice());
         return "forexact_form";
     }
-
     @PostMapping("/actual_prices")
     public String actual_prices2(@ModelAttribute MessageActPrice messageActPrice, Model model) {
         String strOut="";
@@ -219,4 +218,6 @@ public class EloadasBeadandoApplication {
         model.addAttribute("tradeId", strOut);
         return "forexclose_result";
     }
+
+
 }

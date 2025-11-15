@@ -38,5 +38,9 @@ public class MyController {
         return "forexopen_form";
     }
 
-
+    @GetMapping("forexclose_form")
+    public String showForexCloseForm(Model model) {
+    model.addAttribute("param", new MessageClosePosition());
+        return "forexclose_form";
+    }
 }

@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-    <title>SOAP</title>
+    <title>Történeti ár</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -33,7 +33,7 @@
                         <li><a href="/forexhist_form">Történeti ár</a></li>
                         <li><a href="/forexopen_form">Nyitás</a></li>
                         <li><a href="/forexpoz">Pozíció</a></li>
-                        <li><a href="/forexclose">Zárás</a></li>
+                        <li><a href="/forexclose_form">Zárás</a></li>
                     </ul>
                 </li>
             </ul>
@@ -42,11 +42,11 @@
     </div>
 
     <div>
-        <h1>Historical prices result</h1>
+        <h2>Történeti árak</h2>
         <p th:text="'Instrument: ' + ${instr}" />
         <p th:text="'Granularity: ' + ${granularity}" />
         <p th:text="'Historical prices: ' + ${price}" />
-        <a th:href="@{'/hist_prices'}">Select another instrument</a>
+        <a th:href="@{'/forexhist_form'}">Másik instrument választása</a>
     </div>
 
     <!-- Footer -->
@@ -54,7 +54,7 @@
         <!-- Copyright -->
         <div class="copyright">
             <ul class="menu">
-                <li>&copy; Szebeni Szabolcs java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                <li>&copy; Szebeni Szabolcs, Suba Marcell java előadás beadandó</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
             </ul>
         </div>
 
